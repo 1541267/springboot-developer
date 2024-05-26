@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RestController
+@RestController // Response Body에 객체 데이터르 JSON 으로 반환
 public class BlogApiController {
 
   private final BlogService blogService;
 
   @PostMapping("/api/articles")
-  public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest req) {
+  public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest req) {   // @RequestBody로 요청 본문 값 매핑
 
     Article savedArticle = blogService.save(req);
     return ResponseEntity.status(HttpStatus.CREATED).body(savedArticle);
