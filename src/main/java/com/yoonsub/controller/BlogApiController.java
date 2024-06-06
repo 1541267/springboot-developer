@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RestController // Response Body에 객체 데이터르 JSON 으로 반환
+@RestController // Response Body에 객체 데이터를 JSON 으로 반환
 public class BlogApiController {
 
   private final BlogService blogService;
