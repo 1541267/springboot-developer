@@ -14,8 +14,8 @@ public class UserService {
   private final UserRepository userRepository;
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-  public Long save(AddUserRequest dto) {
-    return userRepository.save(User.builder()
+  public Long save(AddUserRequest dto) {		// AddUserRequest 객체를 인수로save()
+    return userRepository.save(User.builder()	// save()
             .email(dto.getEmail())
             .password(bCryptPasswordEncoder.encode(dto.getPassword()))
             .build()).getId();
