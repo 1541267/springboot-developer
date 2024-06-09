@@ -16,3 +16,7 @@ spring:
   h2:
     console:
       enabled: true
+
+jwt:
+  issuer: 1541267@gmail.com    # 발급자
+  secret-key: study  # 비밀키

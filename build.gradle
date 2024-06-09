@@ -47,6 +47,12 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.projectlombok:lombok'
     testRuntimeOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    //JWT
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'     // JWT 라이브러리
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'  // XML 문서와 Java 객체 간 매핑 자동화
+
 
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
