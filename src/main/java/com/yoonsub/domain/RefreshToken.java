@@ -1,17 +1,12 @@
-package com.yoonsub.dto;
+package com.yoonsub.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 @NoArgsConstructor
 @Getter
-@Setter
+@Entity
 public class RefreshToken {
 
   @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
