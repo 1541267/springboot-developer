@@ -5,17 +5,10 @@ if (deleteButton) {
     deleteButton.addEventListener('click', (e) => {
         let id = document.getElementById('article-id').value;
         fetch(`/api/articles/${id}`, {method: 'DELETE'})
-
-        function success() {
-            alert("삭제 완료");
-            location.replace("/articles");
-        }
-        function fail() {
-            alert("삭제 실패");
-            location.replace("/articles");
-        }
-
-        httpRequest("DELETE", "/api/articles/" + id, null,success, fail);
+            .then(() => {
+                alert('Deleted!');
+                location.replace('/articles');
+            });
     });
 }
 
@@ -31,16 +24,10 @@ if (modifyButton) {
             title: document.getElementById('title').value,
             content: document.getElementById('content').value
         })
-        function success() {
-            alert("수정 완료");
-            location.replace("/articles/" + id);
-        }
-
-        function fail() {
-            alert("수정 실패");
-            location.replace("/articles/" + id);
-        }
-        httpRequest("PUT", "/api/articles/" + id, body, success, fail);
+            .then(() => {
+                alert('수정이 완료되었습니다.');
+                location.replace(`/articles/${id}`);
+            });
     });
 }
 // 일반 등록
@@ -148,4 +135,51 @@ function httpRequest(method, url, body, success, fail) {
             return fail();
         }
     });
+
+
+    //336p 삭제*수정
+    const deleteButton = document.getElementById("delete-btn");
+
+    if (deleteButton) {
+        deleteButton.addEventListener("click", (event) => {
+            let id = document.getElementById("article-id").value;
+        function success() {
+            alert("삭제 완료");
+            location.replace("/articles");
+        }
+        function fail() {
+            alert("삭제 실패");
+            location.replace("/articles");
+        }
+
+        httpRequest("DELETE", "/api/articles/" + id, null,success, fail);
+        });
+    }
+
+    //수정
+    const modifyButton = document.getElementById("modify-btn");
+
+    if(modifyButton) {
+        modifyButton.addEventListener("click", (event) => {
+            let params = new URLSearchParams(location.search);
+            let id = params.get("id");
+
+            body = JSON.stringify({
+                title: document.getElementById("title").value,
+                content: document.getElementById("content").value,
+            });
+
+            function success() {
+                alert("수정 완료");
+                location.replace("/articles/" + id);
+            }
+
+            function fail() {
+                alert("수정 실패");
+                location.replace("/articles/" + id);
+            }
+
+            httpRequest("PUT", "/api/articles/" + id, body, success, fail);
+        });
+    }
 }

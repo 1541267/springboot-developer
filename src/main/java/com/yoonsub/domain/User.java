@@ -30,9 +30,11 @@ public class User implements UserDetails {
   private String password;
 
   @Builder
-  public User(String email, String password) {
+  public User(String email, String password, String nickname) {
     this.email = email;
     this.password = password;
+    //317p 생성자 추가
+    this.nickname = nickname;
   }
 
   @Override
@@ -64,5 +66,13 @@ public class User implements UserDetails {
   public boolean isEnabled() {    // 계정 사용 가능 여부
     return UserDetails.super.isEnabled();
   }
+  
+  // 316p OAuth2 사용자정보 조회
+  @Column(name = "nickname", unique = true)
+  private String nickname;
 
+  public User update(String nickname) {
+    this.nickname = nickname;
+    return this;
+  }
 }

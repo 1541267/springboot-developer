@@ -12,12 +12,16 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
   private final UserRepository userRepository;
-  private final BCryptPasswordEncoder bCryptPasswordEncoder;
+  //323p OAuth2 인증 성공 핸들러
+//  private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
   public Long save(AddUserRequest dto) {		// AddUserRequest 객체를 인수로save()
+
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
     return userRepository.save(User.builder()	// save()
             .email(dto.getEmail())
-            .password(bCryptPasswordEncoder.encode(dto.getPassword()))
+            .password(encoder.encode(dto.getPassword()))
             .build()).getId();
   }
 
@@ -25,6 +29,12 @@ public class UserService {
   //290p
   public User findById(Long userId) {
     return userRepository.findById(userId).orElseThrow(() ->
+    new IllegalArgumentException("Unexpected user"));
+  }
+
+  //324p 추가 OAuth2 제공하는 이메일은 PK값, 메서드를 사용해 유저 찾기 가능
+  public User findByEmail(String email) {
+    return userRepository.findByEmail(email).orElseThrow(() ->
     new IllegalArgumentException("Unexpected user"));
   }
 }
